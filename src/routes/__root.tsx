@@ -77,14 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "Sandali Khan Portfolio" },
+      { name: "description", content: "Sandali's Showcase creates a dynamic, personalized portfolio website to highlight key skills and experience." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "Sandali Khan Portfolio" },
+      { property: "og:description", content: "Sandali's Showcase creates a dynamic, personalized portfolio website to highlight key skills and experience." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Sandali Khan Portfolio" },
+      { name: "twitter:description", content: "Sandali's Showcase creates a dynamic, personalized portfolio website to highlight key skills and experience." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/de1be7b8-f0de-4beb-b8d4-198d384d01ec/id-preview-5ad92dd7--941c7112-b258-4a5d-ae6d-6006efe01b85.lovable.app-1781100195927.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/de1be7b8-f0de-4beb-b8d4-198d384d01ec/id-preview-5ad92dd7--941c7112-b258-4a5d-ae6d-6006efe01b85.lovable.app-1781100195927.png" },
     ],
     links: [
       {
