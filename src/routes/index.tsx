@@ -438,6 +438,19 @@ function Experience() {
                   </motion.li>
                 ))}
               </ul>
+              {active.role === "Founder & Business Owner" && (
+                <motion.a
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  href={INSTAGRAM}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 mt-8 text-mono text-xs uppercase tracking-[0.15em] border border-accent px-4 py-2.5 rounded-full hover:bg-accent hover:text-paper transition"
+                >
+                  Visit The Pinterest Store <span>↗</span>
+                </motion.a>
+              )}
             </div>
           </motion.article>
         </AnimatePresence>
