@@ -24,7 +24,7 @@ export const Route = createFileRoute("/")({
 });
 
 const LINKEDIN = "https://linkedin.com/in/sandalikhan";
-const INSTAGRAM = "https://www.instagram.com/the_.pinterest._store/";
+const INSTAGRAM = "https://www.instagram.com/the_.pinterest._store?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==";
 const EMAIL = "mailto:sandalik1801@gmail.com";
 
 function Portfolio() {
