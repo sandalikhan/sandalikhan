@@ -563,7 +563,7 @@ function Contact() {
     <section id="contact" className="px-6 py-32 bg-ink text-paper relative overflow-hidden">
       <motion.div animate={{ rotate: 360 }} transition={{ duration: 60, repeat: Infinity, ease: "linear" }} className="absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full border border-paper/10" />
       <div className="max-w-7xl mx-auto relative">
-        <SectionLabel n="(VI)" label="Let's build" light />
+        <SectionLabel n="(VII)" label="Let's build" light />
         <h2 className="text-display text-6xl md:text-9xl font-light leading-[0.95] mt-8">
           Strategic thinking.
           <br />
