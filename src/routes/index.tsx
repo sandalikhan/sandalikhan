@@ -611,3 +611,84 @@ function SectionLabel({ n, label, light }: { n: string; label: string; light?: b
     </div>
   );
 }
+
+function WhyMe() {
+  const reasons = [
+    { k: "01", t: "I've sat in every seat", d: "Founder, analyst, consultant, marketer. I don't need a translator between functions — I am the translator." },
+    { k: "02", t: "I ship, not just slide", d: "600+ orders shipped, dashboards live in production, recommendations adopted by senior leadership. Strategy that left the deck." },
+    { k: "03", t: "Numbers are my native tongue", d: "Financial modelling, SQL, Power BI. I'll find the 8–15% saving everyone missed because they stopped at the summary row." },
+    { k: "04", t: "I move at startup speed", d: "Cut reporting time 30–40%. Drove 50% growth in 3 months. I optimise the loop, not just the output." },
+    { k: "05", t: "I bring the room with me", d: "Elected academic rep for 105 students. Led 12+ multicultural teams. Stakeholders trust me because I listen first, structure second." },
+  ];
+  const { scrollYProgress } = useScroll();
+  const rotate = useTransform(scrollYProgress, [0, 1], [0, 90]);
+  return (
+    <section id="why" className="px-6 py-32 relative overflow-hidden">
+      <motion.div style={{ rotate }} className="absolute -left-40 top-20 w-[500px] h-[500px] rounded-full border border-accent/20 pointer-events-none" />
+      <motion.div style={{ rotate: useTransform(scrollYProgress, [0, 1], [0, -120]) }} className="absolute -right-32 bottom-10 w-[400px] h-[400px] rounded-[40%_60%_55%_45%] border border-ink/15 pointer-events-none" />
+      <div className="max-w-7xl mx-auto relative">
+        <SectionLabel n="(VI)" label="Why interview me" />
+        <h2 className="text-display text-5xl md:text-7xl font-light leading-[1] mt-6 max-w-4xl">
+          You'll meet a lot of candidates. <span className="italic text-accent">Here's what makes me different.</span>
+        </h2>
+
+        <div className="mt-16 space-y-4">
+          {reasons.map((r, i) => (
+            <motion.div
+              key={r.k}
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ delay: i * 0.08, duration: 0.6, ease: [0.2, 0.8, 0.2, 1] }}
+              whileHover={{ x: 10 }}
+              className="group grid md:grid-cols-12 gap-6 items-baseline border-b border-border pb-6 cursor-default"
+            >
+              <div className="md:col-span-1 text-mono text-xs text-accent tracking-[0.2em]">{r.k}</div>
+              <h3 className="md:col-span-4 text-display text-2xl md:text-3xl font-normal group-hover:text-accent transition-colors">{r.t}</h3>
+              <p className="md:col-span-7 text-muted-foreground leading-relaxed">{r.d}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="mt-20 relative overflow-hidden rounded-3xl border border-ink bg-ink text-paper p-10 md:p-16"
+        >
+          <motion.div
+            animate={{ scale: [1, 1.3, 1], rotate: [0, 180, 360] }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-accent/30 blur-3xl"
+          />
+          <motion.div
+            animate={{ scale: [1.2, 1, 1.2] }}
+            transition={{ duration: 8, repeat: Infinity }}
+            className="absolute -bottom-20 -left-20 w-72 h-72 rounded-full bg-accent/15 blur-3xl"
+          />
+          <div className="relative grid md:grid-cols-12 gap-8 items-center">
+            <div className="md:col-span-8">
+              <p className="text-mono text-xs uppercase tracking-[0.25em] text-paper/60">Ready when you are</p>
+              <h3 className="text-display text-4xl md:text-6xl font-light mt-4 leading-[1]">
+                Let's get on a <span className="italic text-accent">15-minute call.</span>
+              </h3>
+              <p className="mt-4 text-paper/70 max-w-xl">No formal cover letter. No fluff. Just a conversation about how I'd add value to your team from week one.</p>
+            </div>
+            <div className="md:col-span-4 flex md:justify-end">
+              <motion.a
+                href={EMAIL}
+                whileHover={{ scale: 1.05, rotate: -1 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-3 bg-accent text-paper text-mono text-xs uppercase tracking-[0.2em] px-7 py-5 rounded-full shadow-lg"
+              >
+                Book me in
+                <motion.span animate={{ x: [0, 6, 0] }} transition={{ repeat: Infinity, duration: 1.4 }}>→</motion.span>
+              </motion.a>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
