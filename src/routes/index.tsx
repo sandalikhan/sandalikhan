@@ -24,7 +24,7 @@ export const Route = createFileRoute("/")({
 });
 
 const LINKEDIN = "https://linkedin.com/in/sandalikhan";
-const INSTAGRAM = "https://www.instagram.com/the_.pinterest._store/";
+const INSTAGRAM = "https://www.instagram.com/the_.pinterest._store?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==";
 const EMAIL = "mailto:sandalik1801@gmail.com";
 
 function Portfolio() {
@@ -438,6 +438,19 @@ function Experience() {
                   </motion.li>
                 ))}
               </ul>
+              {active.role === "Founder & Business Owner" && (
+                <motion.a
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  href={INSTAGRAM}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 mt-8 text-mono text-xs uppercase tracking-[0.15em] border border-accent px-4 py-2.5 rounded-full hover:bg-accent hover:text-paper transition"
+                >
+                  Visit The Pinterest Store <span>↗</span>
+                </motion.a>
+              )}
             </div>
           </motion.article>
         </AnimatePresence>
