@@ -101,7 +101,7 @@ function Hero() {
       <div className="max-w-7xl mx-auto relative">
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-3 text-mono text-xs uppercase tracking-[0.2em] text-muted-foreground mb-10">
           <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-          Available for Summer 2026 · Manchester, UK
+          Manchester, UK
         </motion.div>
 
         <div className="grid md:grid-cols-12 gap-8 items-center">
