@@ -164,10 +164,9 @@ function Hero() {
         </div>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }} className="mt-16 flex flex-wrap gap-3">
-          <CTA href="#contact" primary>Work with me</CTA>
+          <CTA href="#why" primary>Why interview me</CTA>
           <CTA href="#projects">See projects</CTA>
           <CTA href={LINKEDIN} external>LinkedIn ↗</CTA>
-          <CTA href={INSTAGRAM} external>The Pinterest Store ↗</CTA>
         </motion.div>
       </div>
     </section>
