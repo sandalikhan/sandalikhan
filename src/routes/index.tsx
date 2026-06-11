@@ -572,10 +572,9 @@ function Contact() {
           From day one.
         </h2>
 
-        <div className="mt-20 grid md:grid-cols-3 gap-10 border-t border-paper/20 pt-10">
+        <div className="mt-20 grid md:grid-cols-2 gap-10 border-t border-paper/20 pt-10">
           <ContactRow label="Email" value="sandalik1801@gmail.com" href={EMAIL} />
           <ContactRow label="LinkedIn" value="/in/sandalikhan" href={LINKEDIN} />
-          <ContactRow label="Instagram" value="@the_.pinterest._store" href={INSTAGRAM} />
         </div>
       </div>
     </section>
