@@ -39,6 +39,7 @@ function Portfolio() {
       <Experience />
       <Skills />
       <Projects />
+      <WhyMe />
       <Contact />
       <Footer />
     </div>
