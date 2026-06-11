@@ -59,6 +59,7 @@ function Nav() {
     { href: "#experience", label: "Experience" },
     { href: "#skills", label: "Skills" },
     { href: "#projects", label: "Projects" },
+    { href: "#why", label: "Why Me" },
     { href: "#contact", label: "Contact" },
   ];
   return (
