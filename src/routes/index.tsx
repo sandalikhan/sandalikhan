@@ -110,7 +110,7 @@ function Hero() {
 
         <div className="grid md:grid-cols-12 gap-8 items-center">
           <div className="md:col-span-8 order-2 md:order-1">
-            <h1 className="text-display font-light leading-[0.9] tracking-tight text-[clamp(3.5rem,12vw,11rem)]">
+            <h1 className="text-display font-normal leading-[0.82] tracking-[-0.04em] text-[clamp(4.5rem,15vw,14rem)]">
               <RevealText text="Sandali" />
               <br />
               <RevealText text="Khan." italic accent delay={0.3} />
