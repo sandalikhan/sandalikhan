@@ -300,16 +300,8 @@ function Value() {
   );
 }
 
-function Counter({ to, suffix = "", duration = 2 }: { to: number; suffix?: string; duration?: number }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-50px" });
-  const mv = useMotionValue(0);
-  const spring = useSpring(mv, { stiffness: 50, damping: 20, duration: duration * 1000 });
-  const display = useTransform(spring, (v) => Math.round(v).toString() + suffix);
-  useEffect(() => {
-    if (inView) mv.set(to);
-  }, [inView, to, mv]);
-  return <motion.span ref={ref}>{display}</motion.span>;
+function Counter({ to, suffix = "" }: { to: number; suffix?: string; duration?: number }) {
+  return <span>{to}{suffix}</span>;
 }
 
 function Metrics() {
