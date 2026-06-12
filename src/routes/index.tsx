@@ -253,7 +253,7 @@ function Value() {
   ];
   const [active, setActive] = useState<string | null>(null);
   return (
-    <section id="value" className="px-6 py-28">
+    <section id="value" className="px-6 py-20">
       <div className="max-w-7xl mx-auto">
         <SectionLabel n="(I)" label="What I bring" />
         <h2 className="text-display text-5xl md:text-7xl font-light leading-[1] mt-6 max-w-4xl">
@@ -312,7 +312,7 @@ function Metrics() {
     { v: 600, suffix: "+", l: "Customised orders shipped", sub: "Self-funded e-commerce" },
   ];
   return (
-    <section className="bg-ink text-paper px-6 py-24 relative overflow-hidden">
+    <section className="bg-ink text-paper px-6 py-20 relative overflow-hidden">
       <motion.div animate={{ x: [0, 100, 0], y: [0, -50, 0] }} transition={{ duration: 20, repeat: Infinity }} className="absolute top-0 right-0 w-96 h-96 rounded-full bg-accent/10 blur-3xl" />
       <div className="max-w-7xl mx-auto relative">
         <SectionLabel n="(II)" label="Impact, measured" light />
@@ -381,7 +381,7 @@ function Experience() {
   const [tab, setTab] = useState(0);
   const active = xp[tab];
   return (
-    <section id="experience" className="px-6 py-28">
+    <section id="experience" className="px-6 py-20">
       <div className="max-w-7xl mx-auto">
         <SectionLabel n="(III)" label="Experience" />
         <h2 className="text-display text-5xl md:text-6xl font-light mt-6 max-w-3xl">
@@ -485,7 +485,7 @@ function Skills() {
   const [filter, setFilter] = useState("all");
   const visible = items.filter((i) => filter === "all" || i.k === filter);
   return (
-    <section id="skills" className="px-6 py-28 bg-card border-y border-border">
+    <section id="skills" className="px-6 py-20 bg-card border-y border-border">
       <div className="max-w-7xl mx-auto">
         <SectionLabel n="(IV)" label="Toolkit" />
         <h2 className="text-display text-5xl md:text-6xl font-light mt-6">Pick a <span className="italic text-accent">lens</span>.</h2>
@@ -600,7 +600,7 @@ function Projects() {
 
 function Contact() {
   return (
-    <section id="contact" className="px-6 py-32 bg-ink text-paper relative overflow-hidden">
+    <section id="contact" className="px-6 py-24 bg-ink text-paper relative overflow-hidden">
       <motion.div animate={{ rotate: 360 }} transition={{ duration: 60, repeat: Infinity, ease: "linear" }} className="absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full border border-paper/10" />
       <div className="max-w-7xl mx-auto relative">
         <SectionLabel n="(VII)" label="Let's build" light />
@@ -663,7 +663,7 @@ function WhyMe() {
   const { scrollYProgress } = useScroll();
   const rotate = useTransform(scrollYProgress, [0, 1], [0, 90]);
   return (
-    <section id="why" className="px-6 py-32 relative overflow-hidden">
+    <section id="why" className="px-6 py-20 relative overflow-hidden">
       <motion.div style={{ rotate }} className="absolute -left-40 top-20 w-[500px] h-[500px] rounded-full border border-accent/20 pointer-events-none" />
       <motion.div style={{ rotate: useTransform(scrollYProgress, [0, 1], [0, -120]) }} className="absolute -right-32 bottom-10 w-[400px] h-[400px] rounded-[40%_60%_55%_45%] border border-ink/15 pointer-events-none" />
       <div className="max-w-7xl mx-auto relative">
