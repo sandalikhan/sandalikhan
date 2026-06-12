@@ -267,8 +267,8 @@ function Value() {
               <motion.button
                 key={p.n}
                 onClick={() => setActive(open ? null : p.n)}
-                className="bg-background p-8 md:p-10 text-left group hover:bg-card transition"
-                whileHover={{ y: -2 }}
+                className="bg-background p-8 md:p-10 text-left group hover:bg-card transition lift"
+                whileTap={{ scale: 0.99 }}
               >
                 <div className="flex items-baseline justify-between">
                   <span className="text-mono text-xs text-muted-foreground tracking-[0.2em]">{p.n}</span>
