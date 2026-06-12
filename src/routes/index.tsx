@@ -324,7 +324,7 @@ function Metrics() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="bg-ink p-8"
+              className="bg-ink p-8 lift hover:bg-ink/90"
             >
               <div className="text-display text-6xl md:text-7xl text-accent font-light">
                 <Counter to={x.v} suffix={x.suffix} />
