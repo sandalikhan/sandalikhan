@@ -77,16 +77,18 @@ function Nav() {
         <a href="#contact" className="hidden md:inline-flex text-mono text-xs uppercase tracking-[0.18em] bg-ink text-paper px-4 py-2 rounded-full hover:bg-accent transition items-center gap-2">
           Let's talk <motion.span animate={{ x: [0, 4, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}>→</motion.span>
         </a>
-        <button onClick={() => setOpen(!open)} className="md:hidden text-mono text-xs uppercase tracking-[0.2em]">
-          {open ? "Close" : "Menu"}
+        <button onClick={() => setOpen(!open)} aria-label={open ? "Close menu" : "Open menu"} className="md:hidden relative w-9 h-9 flex items-center justify-center">
+          <motion.span animate={{ rotate: open ? 45 : 0, y: open ? 0 : -5 }} transition={{ duration: 0.3 }} className="absolute block w-6 h-px bg-ink" />
+          <motion.span animate={{ opacity: open ? 0 : 1 }} transition={{ duration: 0.2 }} className="absolute block w-6 h-px bg-ink" />
+          <motion.span animate={{ rotate: open ? -45 : 0, y: open ? 0 : 5 }} transition={{ duration: 0.3 }} className="absolute block w-6 h-px bg-ink" />
         </button>
       </div>
       <AnimatePresence>
         {open && (
-          <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="md:hidden overflow-hidden bg-background border-t border-border">
-            <div className="px-6 py-4 flex flex-col gap-4 text-mono uppercase tracking-[0.2em] text-sm">
-              {links.map((l) => (
-                <a key={l.href} href={l.href} onClick={() => setOpen(false)}>{l.label}</a>
+          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.35, ease: [0.2, 0.8, 0.2, 1] }} className="md:hidden overflow-hidden bg-background border-t border-border">
+            <div className="px-6 py-5 flex flex-col gap-4 text-mono uppercase tracking-[0.2em] text-sm">
+              {links.map((l, i) => (
+                <motion.a key={l.href} href={l.href} onClick={() => setOpen(false)} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.05 + i * 0.04 }}>{l.label}</motion.a>
               ))}
             </div>
           </motion.div>
