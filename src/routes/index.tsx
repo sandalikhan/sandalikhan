@@ -531,34 +531,67 @@ function Projects() {
     { title: "FinTech Business Research", client: "Alliance Manchester Business School", date: "Ongoing", tag: "Research", note: "Interdisciplinary research analysing real-world FinTech challenges using evidence-based methodology." },
     { title: "The Pinterest Store", client: "Self-funded venture", date: "2019 – 2022", tag: "Founder", note: "Zero to 600+ orders. SEO-driven 80% organic growth. 25% repeat purchase lift. Living proof of execution.", href: INSTAGRAM },
   ];
+  const [open, setOpen] = useState<number | null>(null);
   return (
-    <section id="projects" className="px-6 py-28">
+    <section id="projects" className="px-6 py-20">
       <div className="max-w-7xl mx-auto">
         <SectionLabel n="(V)" label="Selected work" />
-        <h2 className="text-display text-5xl md:text-6xl font-light mt-6 max-w-3xl">Strategy that <span className="italic text-accent">shipped.</span></h2>
-        <div className="mt-12 space-y-px bg-border border border-border">
-          {p.map((x, i) => (
-            <motion.a
-              key={i}
-              href={x.href ?? "#contact"}
-              target={x.href ? "_blank" : undefined}
-              rel={x.href ? "noopener noreferrer" : undefined}
-              whileHover="hover"
-              className="bg-background grid md:grid-cols-12 gap-6 p-8 md:p-10 hover:bg-card transition group block"
-            >
-              <div className="md:col-span-1 text-mono text-xs text-muted-foreground">0{i + 1}</div>
-              <div className="md:col-span-6">
-                <span className="text-mono text-[10px] uppercase tracking-[0.2em] text-accent">{x.tag}</span>
-                <h3 className="text-display text-2xl md:text-4xl mt-2 flex items-center gap-3">
-                  {x.title}
-                  <motion.span variants={{ hover: { x: 8, opacity: 1 } }} initial={{ x: 0, opacity: 0.3 }} className="text-accent">→</motion.span>
-                </h3>
+        <h2 className="text-display text-5xl md:text-6xl font-light leading-[0.95] mt-6 max-w-3xl">Strategy that <span className="italic text-accent">shipped.</span></h2>
+        <p className="mt-3 text-muted-foreground text-sm text-mono uppercase tracking-[0.2em]">↓ Click any project to expand</p>
+        <div className="mt-10 space-y-px bg-border border border-border">
+          {p.map((x, i) => {
+            const isOpen = open === i;
+            return (
+              <div key={i} className="bg-background lift">
+                <button
+                  type="button"
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  className="w-full grid md:grid-cols-12 gap-6 p-8 md:p-10 text-left group hover:bg-card transition"
+                >
+                  <div className="md:col-span-1 text-mono text-xs text-muted-foreground">0{i + 1}</div>
+                  <div className="md:col-span-6">
+                    <span className="text-mono text-[10px] uppercase tracking-[0.2em] text-accent">{x.tag}</span>
+                    <h3 className="text-display text-2xl md:text-4xl mt-2 leading-[1.05] flex items-center gap-3">
+                      {x.title}
+                      <motion.span animate={{ rotate: isOpen ? 45 : 0 }} className="text-accent text-2xl">+</motion.span>
+                    </h3>
+                  </div>
+                  <div className="md:col-span-3 text-sm text-muted-foreground self-end">{x.client}</div>
+                  <div className="md:col-span-2 text-mono text-xs text-muted-foreground self-end text-right">{x.date}</div>
+                </button>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.2, 0.8, 0.2, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-8 md:px-10 pb-10 grid md:grid-cols-12 gap-6">
+                        <div className="md:col-span-11 md:col-start-2">
+                          <div className="border-l-2 border-accent pl-5 py-1">
+                            <p className="text-mono text-[10px] uppercase tracking-[0.2em] text-accent mb-2">Outcome</p>
+                            <p className="text-base md:text-lg leading-relaxed">{x.note}</p>
+                          </div>
+                          <div className="mt-6 flex flex-wrap gap-3">
+                            {x.href && (
+                              <a href={x.href} target="_blank" rel="noopener noreferrer" className="text-mono text-xs uppercase tracking-[0.2em] border border-accent text-accent px-4 py-2.5 rounded-full hover:bg-accent hover:text-paper transition">
+                                Visit live ↗
+                              </a>
+                            )}
+                            <a href="#contact" className="text-mono text-xs uppercase tracking-[0.2em] bg-ink text-paper px-4 py-2.5 rounded-full hover:bg-accent transition">
+                              Get in touch →
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-              <div className="md:col-span-3 text-sm text-muted-foreground self-end">{x.client}</div>
-              <div className="md:col-span-2 text-mono text-xs text-muted-foreground self-end text-right">{x.date}</div>
-              <p className="md:col-span-11 md:col-start-2 text-muted-foreground text-sm leading-relaxed">{x.note}</p>
-            </motion.a>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
