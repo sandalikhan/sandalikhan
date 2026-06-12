@@ -232,7 +232,7 @@ function Marquee() {
   const words = ["Hypothesis-Driven", "MECE Structuring", "Stakeholder Management", "Financial Modelling", "Root-Cause Diagnostics", "Cost Optimisation", "Power BI", "Market Sizing", "KPI Frameworks", "Growth Strategy"];
   const loop = [...words, ...words];
   return (
-    <section className="border-y border-border bg-ink text-paper py-6 overflow-hidden">
+    <section className="border-y border-border bg-ink text-paper py-6 overflow-hidden edge-fade">
       <div className="flex marquee whitespace-nowrap">
         {loop.map((w, i) => (
           <span key={i} className="text-display text-3xl md:text-5xl px-8 italic font-light">
