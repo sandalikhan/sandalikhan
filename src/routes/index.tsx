@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion, useInView, useMotionValue, useSpring, useTransform, useScroll, AnimatePresence } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { motion, useSpring, useTransform, useScroll, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import sandaliAsset from "@/assets/sandali.png.asset.json";
 
 export const Route = createFileRoute("/")({
