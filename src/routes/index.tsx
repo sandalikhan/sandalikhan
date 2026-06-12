@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion, useInView, useMotionValue, useSpring, useTransform, useScroll, AnimatePresence } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { motion, useSpring, useTransform, useScroll, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import sandaliAsset from "@/assets/sandali.png.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -77,16 +77,18 @@ function Nav() {
         <a href="#contact" className="hidden md:inline-flex text-mono text-xs uppercase tracking-[0.18em] bg-ink text-paper px-4 py-2 rounded-full hover:bg-accent transition items-center gap-2">
           Let's talk <motion.span animate={{ x: [0, 4, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}>→</motion.span>
         </a>
-        <button onClick={() => setOpen(!open)} className="md:hidden text-mono text-xs uppercase tracking-[0.2em]">
-          {open ? "Close" : "Menu"}
+        <button onClick={() => setOpen(!open)} aria-label={open ? "Close menu" : "Open menu"} className="md:hidden relative w-9 h-9 flex items-center justify-center">
+          <motion.span animate={{ rotate: open ? 45 : 0, y: open ? 0 : -5 }} transition={{ duration: 0.3 }} className="absolute block w-6 h-px bg-ink" />
+          <motion.span animate={{ opacity: open ? 0 : 1 }} transition={{ duration: 0.2 }} className="absolute block w-6 h-px bg-ink" />
+          <motion.span animate={{ rotate: open ? -45 : 0, y: open ? 0 : 5 }} transition={{ duration: 0.3 }} className="absolute block w-6 h-px bg-ink" />
         </button>
       </div>
       <AnimatePresence>
         {open && (
-          <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="md:hidden overflow-hidden bg-background border-t border-border">
-            <div className="px-6 py-4 flex flex-col gap-4 text-mono uppercase tracking-[0.2em] text-sm">
-              {links.map((l) => (
-                <a key={l.href} href={l.href} onClick={() => setOpen(false)}>{l.label}</a>
+          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.35, ease: [0.2, 0.8, 0.2, 1] }} className="md:hidden overflow-hidden bg-background border-t border-border">
+            <div className="px-6 py-5 flex flex-col gap-4 text-mono uppercase tracking-[0.2em] text-sm">
+              {links.map((l, i) => (
+                <motion.a key={l.href} href={l.href} onClick={() => setOpen(false)} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.05 + i * 0.04 }}>{l.label}</motion.a>
               ))}
             </div>
           </motion.div>
@@ -108,7 +110,7 @@ function Hero() {
 
         <div className="grid md:grid-cols-12 gap-8 items-center">
           <div className="md:col-span-8 order-2 md:order-1">
-            <h1 className="text-display font-light leading-[0.9] tracking-tight text-[clamp(3.5rem,12vw,11rem)]">
+            <h1 className="text-display font-normal leading-[0.82] tracking-[-0.04em] text-[clamp(4.5rem,15vw,14rem)]">
               <RevealText text="Sandali" />
               <br />
               <RevealText text="Khan." italic accent delay={0.3} />
@@ -230,7 +232,7 @@ function Marquee() {
   const words = ["Hypothesis-Driven", "MECE Structuring", "Stakeholder Management", "Financial Modelling", "Root-Cause Diagnostics", "Cost Optimisation", "Power BI", "Market Sizing", "KPI Frameworks", "Growth Strategy"];
   const loop = [...words, ...words];
   return (
-    <section className="border-y border-border bg-ink text-paper py-6 overflow-hidden">
+    <section className="border-y border-border bg-ink text-paper py-6 overflow-hidden edge-fade">
       <div className="flex marquee whitespace-nowrap">
         {loop.map((w, i) => (
           <span key={i} className="text-display text-3xl md:text-5xl px-8 italic font-light">
@@ -251,7 +253,7 @@ function Value() {
   ];
   const [active, setActive] = useState<string | null>(null);
   return (
-    <section id="value" className="px-6 py-28">
+    <section id="value" className="px-6 py-20">
       <div className="max-w-7xl mx-auto">
         <SectionLabel n="(I)" label="What I bring" />
         <h2 className="text-display text-5xl md:text-7xl font-light leading-[1] mt-6 max-w-4xl">
@@ -265,8 +267,8 @@ function Value() {
               <motion.button
                 key={p.n}
                 onClick={() => setActive(open ? null : p.n)}
-                className="bg-background p-8 md:p-10 text-left group hover:bg-card transition"
-                whileHover={{ y: -2 }}
+                className="bg-background p-8 md:p-10 text-left group hover:bg-card transition lift"
+                whileTap={{ scale: 0.99 }}
               >
                 <div className="flex items-baseline justify-between">
                   <span className="text-mono text-xs text-muted-foreground tracking-[0.2em]">{p.n}</span>
@@ -298,16 +300,8 @@ function Value() {
   );
 }
 
-function Counter({ to, suffix = "", duration = 2 }: { to: number; suffix?: string; duration?: number }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-50px" });
-  const mv = useMotionValue(0);
-  const spring = useSpring(mv, { stiffness: 50, damping: 20, duration: duration * 1000 });
-  const display = useTransform(spring, (v) => Math.round(v).toString() + suffix);
-  useEffect(() => {
-    if (inView) mv.set(to);
-  }, [inView, to, mv]);
-  return <motion.span ref={ref}>{display}</motion.span>;
+function Counter({ to, suffix = "" }: { to: number; suffix?: string; duration?: number }) {
+  return <span>{to}{suffix}</span>;
 }
 
 function Metrics() {
@@ -318,7 +312,7 @@ function Metrics() {
     { v: 600, suffix: "+", l: "Customised orders shipped", sub: "Self-funded e-commerce" },
   ];
   return (
-    <section className="bg-ink text-paper px-6 py-24 relative overflow-hidden">
+    <section className="bg-ink text-paper px-6 py-20 relative overflow-hidden">
       <motion.div animate={{ x: [0, 100, 0], y: [0, -50, 0] }} transition={{ duration: 20, repeat: Infinity }} className="absolute top-0 right-0 w-96 h-96 rounded-full bg-accent/10 blur-3xl" />
       <div className="max-w-7xl mx-auto relative">
         <SectionLabel n="(II)" label="Impact, measured" light />
@@ -330,7 +324,7 @@ function Metrics() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="bg-ink p-8"
+              className="bg-ink p-8 lift hover:bg-ink/90"
             >
               <div className="text-display text-6xl md:text-7xl text-accent font-light">
                 <Counter to={x.v} suffix={x.suffix} />
@@ -387,7 +381,7 @@ function Experience() {
   const [tab, setTab] = useState(0);
   const active = xp[tab];
   return (
-    <section id="experience" className="px-6 py-28">
+    <section id="experience" className="px-6 py-20">
       <div className="max-w-7xl mx-auto">
         <SectionLabel n="(III)" label="Experience" />
         <h2 className="text-display text-5xl md:text-6xl font-light mt-6 max-w-3xl">
@@ -491,7 +485,7 @@ function Skills() {
   const [filter, setFilter] = useState("all");
   const visible = items.filter((i) => filter === "all" || i.k === filter);
   return (
-    <section id="skills" className="px-6 py-28 bg-card border-y border-border">
+    <section id="skills" className="px-6 py-20 bg-card border-y border-border">
       <div className="max-w-7xl mx-auto">
         <SectionLabel n="(IV)" label="Toolkit" />
         <h2 className="text-display text-5xl md:text-6xl font-light mt-6">Pick a <span className="italic text-accent">lens</span>.</h2>
@@ -537,34 +531,67 @@ function Projects() {
     { title: "FinTech Business Research", client: "Alliance Manchester Business School", date: "Ongoing", tag: "Research", note: "Interdisciplinary research analysing real-world FinTech challenges using evidence-based methodology." },
     { title: "The Pinterest Store", client: "Self-funded venture", date: "2019 – 2022", tag: "Founder", note: "Zero to 600+ orders. SEO-driven 80% organic growth. 25% repeat purchase lift. Living proof of execution.", href: INSTAGRAM },
   ];
+  const [open, setOpen] = useState<number | null>(null);
   return (
-    <section id="projects" className="px-6 py-28">
+    <section id="projects" className="px-6 py-20">
       <div className="max-w-7xl mx-auto">
         <SectionLabel n="(V)" label="Selected work" />
-        <h2 className="text-display text-5xl md:text-6xl font-light mt-6 max-w-3xl">Strategy that <span className="italic text-accent">shipped.</span></h2>
-        <div className="mt-12 space-y-px bg-border border border-border">
-          {p.map((x, i) => (
-            <motion.a
-              key={i}
-              href={x.href ?? "#contact"}
-              target={x.href ? "_blank" : undefined}
-              rel={x.href ? "noopener noreferrer" : undefined}
-              whileHover="hover"
-              className="bg-background grid md:grid-cols-12 gap-6 p-8 md:p-10 hover:bg-card transition group block"
-            >
-              <div className="md:col-span-1 text-mono text-xs text-muted-foreground">0{i + 1}</div>
-              <div className="md:col-span-6">
-                <span className="text-mono text-[10px] uppercase tracking-[0.2em] text-accent">{x.tag}</span>
-                <h3 className="text-display text-2xl md:text-4xl mt-2 flex items-center gap-3">
-                  {x.title}
-                  <motion.span variants={{ hover: { x: 8, opacity: 1 } }} initial={{ x: 0, opacity: 0.3 }} className="text-accent">→</motion.span>
-                </h3>
+        <h2 className="text-display text-5xl md:text-6xl font-light leading-[0.95] mt-6 max-w-3xl">Strategy that <span className="italic text-accent">shipped.</span></h2>
+        <p className="mt-3 text-muted-foreground text-sm text-mono uppercase tracking-[0.2em]">↓ Click any project to expand</p>
+        <div className="mt-10 space-y-px bg-border border border-border">
+          {p.map((x, i) => {
+            const isOpen = open === i;
+            return (
+              <div key={i} className="bg-background lift">
+                <button
+                  type="button"
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  className="w-full grid md:grid-cols-12 gap-6 p-8 md:p-10 text-left group hover:bg-card transition"
+                >
+                  <div className="md:col-span-1 text-mono text-xs text-muted-foreground">0{i + 1}</div>
+                  <div className="md:col-span-6">
+                    <span className="text-mono text-[10px] uppercase tracking-[0.2em] text-accent">{x.tag}</span>
+                    <h3 className="text-display text-2xl md:text-4xl mt-2 leading-[1.05] flex items-center gap-3">
+                      {x.title}
+                      <motion.span animate={{ rotate: isOpen ? 45 : 0 }} className="text-accent text-2xl">+</motion.span>
+                    </h3>
+                  </div>
+                  <div className="md:col-span-3 text-sm text-muted-foreground self-end">{x.client}</div>
+                  <div className="md:col-span-2 text-mono text-xs text-muted-foreground self-end text-right">{x.date}</div>
+                </button>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.2, 0.8, 0.2, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-8 md:px-10 pb-10 grid md:grid-cols-12 gap-6">
+                        <div className="md:col-span-11 md:col-start-2">
+                          <div className="border-l-2 border-accent pl-5 py-1">
+                            <p className="text-mono text-[10px] uppercase tracking-[0.2em] text-accent mb-2">Outcome</p>
+                            <p className="text-base md:text-lg leading-relaxed">{x.note}</p>
+                          </div>
+                          <div className="mt-6 flex flex-wrap gap-3">
+                            {x.href && (
+                              <a href={x.href} target="_blank" rel="noopener noreferrer" className="text-mono text-xs uppercase tracking-[0.2em] border border-accent text-accent px-4 py-2.5 rounded-full hover:bg-accent hover:text-paper transition">
+                                Visit live ↗
+                              </a>
+                            )}
+                            <a href="#contact" className="text-mono text-xs uppercase tracking-[0.2em] bg-ink text-paper px-4 py-2.5 rounded-full hover:bg-accent transition">
+                              Get in touch →
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-              <div className="md:col-span-3 text-sm text-muted-foreground self-end">{x.client}</div>
-              <div className="md:col-span-2 text-mono text-xs text-muted-foreground self-end text-right">{x.date}</div>
-              <p className="md:col-span-11 md:col-start-2 text-muted-foreground text-sm leading-relaxed">{x.note}</p>
-            </motion.a>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
@@ -573,7 +600,7 @@ function Projects() {
 
 function Contact() {
   return (
-    <section id="contact" className="px-6 py-32 bg-ink text-paper relative overflow-hidden">
+    <section id="contact" className="px-6 py-24 bg-ink text-paper relative overflow-hidden">
       <motion.div animate={{ rotate: 360 }} transition={{ duration: 60, repeat: Infinity, ease: "linear" }} className="absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full border border-paper/10" />
       <div className="max-w-7xl mx-auto relative">
         <SectionLabel n="(VII)" label="Let's build" light />
@@ -636,7 +663,7 @@ function WhyMe() {
   const { scrollYProgress } = useScroll();
   const rotate = useTransform(scrollYProgress, [0, 1], [0, 90]);
   return (
-    <section id="why" className="px-6 py-32 relative overflow-hidden">
+    <section id="why" className="px-6 py-20 relative overflow-hidden">
       <motion.div style={{ rotate }} className="absolute -left-40 top-20 w-[500px] h-[500px] rounded-full border border-accent/20 pointer-events-none" />
       <motion.div style={{ rotate: useTransform(scrollYProgress, [0, 1], [0, -120]) }} className="absolute -right-32 bottom-10 w-[400px] h-[400px] rounded-[40%_60%_55%_45%] border border-ink/15 pointer-events-none" />
       <div className="max-w-7xl mx-auto relative">
