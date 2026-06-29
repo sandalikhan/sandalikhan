@@ -37,10 +37,10 @@ function Portfolio() {
       <Marquee />
       <Value />
       <Metrics />
+      <VideoIntro />
       <Experience />
       <Skills />
       <Projects />
-      <VideoIntro />
       <WhyMe />
       <Contact />
       <Footer />
