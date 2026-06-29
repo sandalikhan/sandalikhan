@@ -40,6 +40,7 @@ function Portfolio() {
       <Experience />
       <Skills />
       <Projects />
+      <VideoIntro />
       <WhyMe />
       <Contact />
       <Footer />
