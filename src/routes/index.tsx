@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion, useSpring, useTransform, useScroll, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import sandaliAsset from "@/assets/sandali.png.asset.json";
+import introVideoAsset from "@/assets/sandali-intro.mp4.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -39,6 +40,7 @@ function Portfolio() {
       <Experience />
       <Skills />
       <Projects />
+      <VideoIntro />
       <WhyMe />
       <Contact />
       <Footer />
@@ -651,6 +653,50 @@ function SectionLabel({ n, label, light }: { n: string; label: string; light?: b
     </div>
   );
 }
+
+function VideoIntro() {
+  return (
+    <section id="intro-video" className="px-6 py-20 bg-card border-y border-border">
+      <div className="max-w-7xl mx-auto grid md:grid-cols-12 gap-10 items-center">
+        <div className="md:col-span-5 order-2 md:order-1">
+          <SectionLabel n="(V·b)" label="In my own words" />
+          <h2 className="text-display text-4xl md:text-6xl font-light leading-[1] mt-6">
+            A 60-second <span className="italic text-accent">introduction.</span>
+          </h2>
+          <p className="mt-6 text-muted-foreground leading-relaxed max-w-md">
+            Faster than a cover letter. The story behind the CV — how I think, what I've built, and why I'd be useful from week one.
+          </p>
+          <div className="mt-8 flex items-center gap-3 text-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
+            <span className="w-8 h-px bg-accent" />
+            Press play
+          </div>
+        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.8, ease: [0.2, 0.8, 0.2, 1] }}
+          className="md:col-span-7 order-1 md:order-2 flex justify-center"
+        >
+          <motion.div whileHover={{ y: -4 }} transition={{ type: "spring", stiffness: 200 }} className="relative">
+            <div className="absolute -inset-4 bg-accent/15 rounded-[2.5rem] blur-2xl" />
+            <div className="relative rounded-[2rem] border border-ink overflow-hidden bg-ink shadow-2xl">
+              <video
+                src={introVideoAsset.url}
+                controls
+                playsInline
+                preload="metadata"
+                className="block w-full max-w-[360px] aspect-[9/16] object-cover"
+              />
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+
 
 function WhyMe() {
   const reasons = [
