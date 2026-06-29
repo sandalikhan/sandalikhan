@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion, useSpring, useTransform, useScroll, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import sandaliAsset from "@/assets/sandali.png.asset.json";
+import introVideoAsset from "@/assets/sandali-intro.mp4.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
