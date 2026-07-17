@@ -542,7 +542,7 @@ function Projects() {
     },
     { title: "Organisational Restructuring Diagnostic", client: "Auditsu", date: "Mar 2026", tag: "Consulting", note: "Full MECE diagnostic surfaced 6 structural inefficiencies. Delivered a prioritised restructuring roadmap — adopted by senior leadership." },
     { title: "Strategic Consulting Engagement", client: "Richmond Hope Foundation", date: "Jan 2026", tag: "Strategy", note: "Market assessment + stakeholder analysis. Tested strategic hypotheses to identify mission-delivery gaps that shaped the 3-year strategic plan." },
-    { title: "FinTech Business Research", client: "Alliance Manchester Business School", date: "Ongoing", tag: "Research", note: "Interdisciplinary research analysing real-world FinTech challenges using evidence-based methodology." },
+    { title: "FinTech Business Research", client: "Alliance Manchester Business School", date: "June 2026", tag: "Research", note: "Interdisciplinary research analysing real-world FinTech challenges using evidence-based methodology." },
     { title: "The Pinterest Store", client: "Self-funded venture", date: "2019 – 2022", tag: "Founder", note: "Zero to 600+ orders. SEO-driven 80% organic growth. 25% repeat purchase lift. Living proof of execution.", href: INSTAGRAM },
   ];
   const [open, setOpen] = useState<number | null>(null);
