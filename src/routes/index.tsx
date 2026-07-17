@@ -586,7 +586,23 @@ function Projects() {
                         <div className="md:col-span-11 md:col-start-2">
                           <div className="border-l-2 border-accent pl-5 py-1">
                             <p className="text-mono text-[10px] uppercase tracking-[0.2em] text-accent mb-2">Outcome</p>
-                            <p className="text-base md:text-lg leading-relaxed">{x.note}</p>
+                            {x.role && <p className="text-mono text-xs uppercase tracking-[0.15em] text-muted-foreground mb-4">{x.role}</p>}
+                            {x.body ? (
+                              <div className="space-y-4">
+                                {x.body.map((para, idx) => (
+                                  <p key={idx} className="text-base md:text-lg leading-relaxed">{para}</p>
+                                ))}
+                              </div>
+                            ) : (
+                              <p className="text-base md:text-lg leading-relaxed">{x.note}</p>
+                            )}
+                            {x.tags && (
+                              <div className="mt-5 flex flex-wrap gap-2">
+                                {x.tags.map((t) => (
+                                  <span key={t} className="text-mono text-[10px] uppercase tracking-[0.15em] border border-border px-2.5 py-1 rounded-full">{t}</span>
+                                ))}
+                              </div>
+                            )}
                           </div>
                           <div className="mt-6 flex flex-wrap gap-3">
                             {x.href && (
