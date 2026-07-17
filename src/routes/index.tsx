@@ -528,6 +528,18 @@ function Skills() {
 
 function Projects() {
   const p = [
+    {
+      title: "Wise — Ecosystem Strategy Consulting Pitch",
+      client: "Alliance Manchester Business School",
+      date: "Jul 2026",
+      tag: "Consulting",
+      role: "Role: Project Manager, 6-person consulting team",
+      body: [
+        "Led a systems-based consulting pitch advising Wise (cross-border payments, $43tn market) — authored the industry, ecosystem, regulatory, and strategic recommendations sections and managed the team to final delivery.",
+        "Diagnosed Wise's two core strategic risks — customer retention without lock-in and disintermediation by its own banking partners — and proposed a \"governed embeddedness\" strategy: recurring-flow retention, multi-year partner alliances, and compliance-as-a-product.",
+      ],
+      tags: ["Strategy", "Systems Analysis", "Stakeholder Management"],
+    },
     { title: "Organisational Restructuring Diagnostic", client: "Auditsu", date: "Mar 2026", tag: "Consulting", note: "Full MECE diagnostic surfaced 6 structural inefficiencies. Delivered a prioritised restructuring roadmap — adopted by senior leadership." },
     { title: "Strategic Consulting Engagement", client: "Richmond Hope Foundation", date: "Jan 2026", tag: "Strategy", note: "Market assessment + stakeholder analysis. Tested strategic hypotheses to identify mission-delivery gaps that shaped the 3-year strategic plan." },
     { title: "FinTech Business Research", client: "Alliance Manchester Business School", date: "Ongoing", tag: "Research", note: "Interdisciplinary research analysing real-world FinTech challenges using evidence-based methodology." },
@@ -574,7 +586,23 @@ function Projects() {
                         <div className="md:col-span-11 md:col-start-2">
                           <div className="border-l-2 border-accent pl-5 py-1">
                             <p className="text-mono text-[10px] uppercase tracking-[0.2em] text-accent mb-2">Outcome</p>
-                            <p className="text-base md:text-lg leading-relaxed">{x.note}</p>
+                            {x.role && <p className="text-mono text-xs uppercase tracking-[0.15em] text-muted-foreground mb-4">{x.role}</p>}
+                            {x.body ? (
+                              <div className="space-y-4">
+                                {x.body.map((para, idx) => (
+                                  <p key={idx} className="text-base md:text-lg leading-relaxed">{para}</p>
+                                ))}
+                              </div>
+                            ) : (
+                              <p className="text-base md:text-lg leading-relaxed">{x.note}</p>
+                            )}
+                            {x.tags && (
+                              <div className="mt-5 flex flex-wrap gap-2">
+                                {x.tags.map((t) => (
+                                  <span key={t} className="text-mono text-[10px] uppercase tracking-[0.15em] border border-border px-2.5 py-1 rounded-full">{t}</span>
+                                ))}
+                              </div>
+                            )}
                           </div>
                           <div className="mt-6 flex flex-wrap gap-3">
                             {x.href && (
